@@ -1,0 +1,18 @@
+{
+  "Domains": [
+    {
+      "Domain": "localhost",
+      "Redirects": [{
+          "Origin": "google",
+          "Redirect": "https://google.com"
+      }]
+    },
+    {
+      "Domain": "127.0.0.1",
+      "Redirects": [{
+          "Origin": "google",
+          "Redirect": "https://google.com"
+      }]
+    }
+  ]
+}

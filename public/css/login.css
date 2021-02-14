@@ -1,0 +1,77 @@
+body{
+  background-color: var(--darker);
+  margin: 0;
+  font-family: sans-serif;
+}
+
+.loginBox{
+  background-color: var(--dark);
+  border-radius: 5px;
+  width: 300px;
+  margin-left: 50%;
+  margin-top: 50vh;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+
+input[type="Text"], input[type="Password"]{
+  outline: none;
+  border: none;
+
+  border-radius: 50px;
+
+  margin: 10px;
+  margin-left: 50%;
+  transform: translateX(-50%);
+
+  padding: 10px;
+
+  font-size: 15px;
+  text-align: center;
+
+  width: 80%;
+}
+
+button{
+  outline: none;
+  border: none;
+
+  border-radius: 50px;
+
+  border: 2px solid var(--primary);
+
+  margin: 10px;
+  margin-top: 20px;
+  margin-left: 50%;
+  transform: translateX(-50%);
+
+  padding: 10px;
+
+  font-size: 15px;
+  text-align: center;
+  color: var(--primary);
+
+  width: 85%;
+
+  background-color: var(--white);
+
+  transition-duration: 0.3s;
+}
+
+button:hover{
+  outline: none;
+  border: none;
+
+  width: 80%;
+
+  border: 2px solid var(--primary);
+
+  background-color: var(--white);
+}
+
+/* input[type="Text"], input[type="Password"]:focus{
+  outline: none;
+  border: none;
+
+  box-shadow: 0 0 0 5px var(--primary);
+} */

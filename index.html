@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>WebPanel</title>
+
+    <link rel="stylesheet" href="./css/color.css">
+    <link rel="stylesheet" href="./css/master.css">
+
+    <script type="text/javascript" src="./js/index.js"></script>
+  </head>
+  <body>
+    <div class="flex-container">
+      <ul>
+        <li><a><h2 style="color: var(--primary);">WebPanel</h2></a></li>
+        <li><a onclick="openWindow('dashboard')">Dashboard</a></li>
+        <li><a onclick="openWindow('domains')">Domains</a></li>
+        <li><a onclick="openWindow('redirects')">Redirects</a></li>
+      </ul>
+
+      <div class="right" id="selectContainer">
+        <div class="" id="dashboard">
+          a
+        </div>
+        <div class="hidden" id="domains">
+          b
+        </div>
+        <div class="hidden" id="redirects">
+          c
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
