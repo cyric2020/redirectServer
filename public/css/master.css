@@ -2,6 +2,7 @@ body{
   background-color: var(--dark);
   margin: 0;
   font-family: sans-serif;
+  color: var(--white);
 }
 
 ul {
@@ -25,10 +26,35 @@ li a:hover {
   color: var(--primary);
 }
 
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  text-align: left;
+  padding: 8px;
+  background-color: var(--darker);
+}
+
+/* td:nth-child(1) {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+} */
+
+tr{
+  padding-bottom: 10px;
+}
+
 .flex-container{
   display: flex;
 }
 
 .hidden{
   display: none;
+}
+
+.containerMargins{
+  margin: 20px;
 }

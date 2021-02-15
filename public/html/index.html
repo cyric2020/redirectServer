@@ -7,11 +7,13 @@
     <link rel="stylesheet" href="./css/color.css">
     <link rel="stylesheet" href="./css/master.css">
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/b82e5e335a.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="./js/index.js"></script>
   </head>
   <body>
     <div class="flex-container">
-      <ul>
+      <ul id="navBarUl">
         <li><a><h2 style="color: var(--primary);">WebPanel</h2></a></li>
         <li><a onclick="openWindow('dashboard')">Dashboard</a></li>
         <li><a onclick="openWindow('domains')">Domains</a></li>
@@ -20,10 +22,16 @@
 
       <div class="right" id="selectContainer">
         <div class="" id="dashboard">
-          a
+          <div class="containerMargins">
+            <h1>Dashboard</h1>
+          </div>
         </div>
         <div class="hidden" id="domains">
-          b
+          <div class="containerMargins">
+            <h1>Domains</h1>
+            <table id="domainTable">
+            </table>
+          </div>
         </div>
         <div class="hidden" id="redirects">
           c

@@ -30,13 +30,13 @@ app.get('/login', (req, res) => {
 
 app.get('/panel', (req, res) => {
   var options = {
-    root: path.join(__dirname)
+    root: path.join(__dirname + "/public/html")
   };
 
   var fileName = 'index.html';
   res.sendFile(fileName, options, function (err) {
     if (err) {
-      next(err);
+      console.log(err);
     } else {
       console.log('Sent:', fileName);
     }
