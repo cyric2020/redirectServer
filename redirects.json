@@ -2,17 +2,21 @@
   "Domains": [
     {
       "Domain": "localhost",
-      "Redirects": [{
+      "Redirects": [
+        {
           "Origin": "google",
           "Redirect": "https://google.com"
-      }]
+        }
+      ]
     },
     {
       "Domain": "127.0.0.1",
-      "Redirects": [{
+      "Redirects": [
+        {
           "Origin": "google",
           "Redirect": "https://google.com"
-      }]
+        }
+      ]
     }
   ]
 }

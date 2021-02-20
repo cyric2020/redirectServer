@@ -14,12 +14,41 @@ function params(){
   }
 }
 
+function insertParam(key, value) {
+    key = encodeURIComponent(key);
+    value = encodeURIComponent(value);
+
+    // kvp looks like ['key1=value1', 'key2=value2', ...]
+    var kvp = document.location.search.substr(1).split('&');
+    let i=0;
+
+    for(; i<kvp.length; i++){
+        if (kvp[i].startsWith(key + '=')) {
+            let pair = kvp[i].split('=');
+            pair[1] = value;
+            kvp[i] = pair.join('=');
+            break;
+        }
+    }
+
+    if(i >= kvp.length){
+        kvp[kvp.length] = [key,value].join('=');
+    }
+
+    // can return this or...
+    let params = kvp.join('&');
+
+    // reload page with new params
+    document.location.search = params;
+}
+
 function fillTables(){
   fillDomainTable();
 }
 
 function fillDomainTable(){
   var table = document.getElementById('domainTable');
+  table.innerHTML = "";
   $.post(location.protocol + "/domains", function(data) {
     for(i = 0; i < data.length; i++){
       var tr = document.createElement('tr');
@@ -60,8 +89,13 @@ function openEditModeDomains(btn){
     btnTd[0].classList.remove('fa-save');
     btnTd[0].classList.add('fa-pencil-alt');
 
-    updateDomain(inputTd.getAttribute('oldData'), root[0].childNodes[0].value)
+    updateDomain(inputTd.getAttribute('oldData'), root[0].childNodes[0].data);
   }
+}
+
+function preOpenWindow(windowName){
+  insertParam('window', windowName);
+  openWindow(windowName);
 }
 
 function openWindow(windowName){
@@ -75,4 +109,12 @@ function openWindow(windowName){
       }
     }
   }
+}
+
+function updateDomain(old, newDomain){
+  console.log(newDomain);
+  $.post(location.protocol + "/updatedomains", {old: old, new: newDomain}, function(data) {
+    console.log(data);
+    fillDomainTable();
+  });
 }

@@ -15,9 +15,10 @@
     <div class="flex-container">
       <ul id="navBarUl">
         <li><a><h2 style="color: var(--primary);">WebPanel</h2></a></li>
-        <li><a onclick="openWindow('dashboard')">Dashboard</a></li>
-        <li><a onclick="openWindow('domains')">Domains</a></li>
-        <li><a onclick="openWindow('redirects')">Redirects</a></li>
+        <li><a onclick="preOpenWindow('dashboard')">Dashboard</a></li>
+        <li><a onclick="preOpenWindow('domains')">Domains</a></li>
+        <li><a onclick="preOpenWindow('redirects')">Redirects</a></li>
+        <li style="position: absolute; bottom: 10px;;"><a onclick="logOut()"><i class="fas fa-sign-out-alt"></i> Sign Out</a></li>
       </ul>
 
       <div class="right" id="selectContainer">

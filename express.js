@@ -61,8 +61,32 @@ app.post('/domains', (req, res) => {
   res.send(pullDomains(json));
 });
 
+app.post('/updateDomains', (req, res) => {
+  var body = req.body;
+  if(body.old == undefined){
+    res.send("No old domain defined.");
+    return;
+  }else if(body.new == undefined){
+    res.send("No new domain defined.");
+    return;
+  }
+  var old = body.old;
+  var newDomain = body.new;
+  var json = pullJson();
+  var domains = json.Domains;
+
+  for(i = 0; i < domains.length; i++){
+    if(domains[i].Domain == old){
+      domains[i].Domain = newDomain;
+    }
+  }
+
+  writeJson(json);
+
+  res.sendStatus(200);
+});
+
 app.post('/redirects', (req, res) => {
-  console.log(req.body);
   var json = pullJson();
   res.send(pullRedirectsAndDomains(json));
 });
@@ -118,6 +142,16 @@ function pullDomains(json){
   }
 
   return domains;
+}
+
+function writeJson(json){
+  var data = JSON.stringify(json, null, 2);
+  fs.writeFile('redirects.json', data, (err) => {
+    if(err){
+      throw err;
+    }
+    console.log('DataWriteSuccesfful');
+  })
 }
 
 function pullRedirectsAndDomains(json){
