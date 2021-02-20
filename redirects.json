@@ -4,6 +4,10 @@
       "Domain": "localhost",
       "Redirects": [
         {
+          "Origin": "youtube",
+          "Redirect": "https://youtube.com"
+        },
+        {
           "Origin": "google",
           "Redirect": "https://google.com"
         }
@@ -13,8 +17,8 @@
       "Domain": "127.0.0.1",
       "Redirects": [
         {
-          "Origin": "google",
-          "Redirect": "https://google.com"
+          "Origin": "bettergoogle",
+          "Redirect": "https://better.google.com"
         }
       ]
     }

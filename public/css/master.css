@@ -5,6 +5,15 @@ body{
   color: var(--white);
 }
 
+h2{
+  margin: 0;
+  padding: 0;
+}
+
+input{
+  width: 100%;
+}
+
 ul {
   list-style-type: none;
   margin: 0;
@@ -57,4 +66,16 @@ tr{
 
 .containerMargins{
   margin: 20px;
+}
+
+.redirects{
+  /* display: flex; */
+  /* flex: 1 0 0; */
+}
+
+.redirect{
+  background-color: var(--darker);
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
 }

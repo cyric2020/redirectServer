@@ -15,13 +15,13 @@ app.use(express.static('public'));
 
 app.get('/login', (req, res) => {
   var options = {
-    root: path.join(__dirname)
+    root: path.join(__dirname + "/public/html")
   };
 
   var fileName = 'login.html';
   res.sendFile(fileName, options, function (err) {
     if (err) {
-      next(err);
+      throw(err);
     } else {
       console.log('Sent:', fileName);
     }
@@ -78,6 +78,54 @@ app.post('/updateDomains', (req, res) => {
   for(i = 0; i < domains.length; i++){
     if(domains[i].Domain == old){
       domains[i].Domain = newDomain;
+    }
+  }
+
+  writeJson(json);
+
+  res.sendStatus(200);
+});
+
+app.post('/updateRedirects', (req, res) => {
+  var body = req.body;
+  if(body.oldUrl == undefined){
+    res.send("No oldUrl domain defined.");
+    return;
+  }else if(body.newUrl == undefined){
+    res.send("No newUrl domain defined.");
+    return;
+  }else if(body.oldRedirect == undefined){
+    res.send("No oldRedirect domain defined.");
+    return;
+  }else if(body.newRedirect == undefined){
+    res.send("No newRedirect domain defined.");
+    return;
+  }
+  var oldUrl = body.oldUrl;
+  var newUrl = body.newUrl;
+  var oldRedirect = body.oldRedirect;
+  var newRedirect = body.newRedirect;
+  var domain = body.Domain
+  var json = pullJson();
+
+  // psudeo code: remove the old one from the old domain and add the new one into the domain.
+
+  var domains = json.Domains;
+  for(i = 0; i < domains.length; i++){
+    var continueRunning = false;
+    if(domains[i].Domain == domain){
+      for(o = 0; o < domains[i].Redirects.length; o++){
+        if(domains[i].Redirects[o].Origin == oldUrl){
+          domains[i].Redirects.splice(o, 1);
+          continueRunning = true;
+        }
+        console.log(domains[i].Redirects[o]);
+      }
+    }
+
+    if(domains[i].Domain == domain && continueRunning == true){
+      domains[i].Redirects.push({"Origin": newUrl, "Redirect": newRedirect});
+      writeJson(json);
     }
   }
 
