@@ -5,6 +5,13 @@ body{
   color: var(--white);
 }
 
+button{
+  color: white;
+  background: none;
+  border: none;
+  outline: none;
+}
+
 h2{
   margin: 0;
   padding: 0;

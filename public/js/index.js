@@ -96,7 +96,7 @@ function openEditModeDomains(btn){
 
 function createRedirects(){
   var mainDiv = document.getElementById('redirectsContainer');
-  var talbe = document.getElementById('redirectTable');
+  mainDiv.innerHTML = "";
   $.post(location.protocol + "/redirects", function(data) {
     var domains = data;
     for(i = 0; i < domains.length; i++){
@@ -114,6 +114,8 @@ function createRedirects(){
         var tdRedirect = document.createElement('td');
         var tdEdit = document.createElement('td');
         var icon = document.createElement('i');
+        var tdDelete = document.createElement('td');
+        var iconDelete = document.createElement('i');
 
         tdUrl.innerText = domains[i][o][0];
         tdRedirect.innerText = domains[i][o][1];
@@ -121,14 +123,23 @@ function createRedirects(){
         icon.classList.add('fas');
         icon.classList.add('fa-pencil-alt');
 
+        iconDelete.classList.add('fas');
+        iconDelete.classList.add('fa-trash-alt');
+
         tdEdit.appendChild(icon);
+        tdDelete.appendChild(iconDelete);
         tr.appendChild(tdUrl);
         tr.appendChild(tdRedirect);
         tr.appendChild(tdEdit);
+        tr.appendChild(tdDelete);
         div.appendChild(tr);
 
         tdEdit.addEventListener('click', function (){
           openEditModeRedirect(this);
+        });
+
+        tdDelete.addEventListener('click', function(){
+          deleteRedirect(this);
         });
       }
 
@@ -140,7 +151,7 @@ function createRedirects(){
       var input1 = document.createElement('input');
       var input2 = document.createElement('input');
 
-      button.innerHTML = "Create";
+      button.innerHTML = '<i class="fas fa-plus-square"></i>';
 
       td1.appendChild(input1);
       td2.appendChild(input2);
@@ -151,7 +162,7 @@ function createRedirects(){
       div.appendChild(tr);
 
       button.addEventListener('click', function(){
-        createRedirect();
+        createRedirect(this.parentNode.parentNode.parentNode.childNodes[0].innerText, this.parentNode.parentNode.childNodes[1].childNodes[0].value, this.parentNode.parentNode.childNodes[0].childNodes[0].value);
       })
     }
   })
@@ -209,7 +220,7 @@ function openEditModeRedirect(btn){
     btnTd[0].classList.remove('fa-save');
     btnTd[0].classList.add('fa-pencil-alt');
 
-    updateRedirects(inputTd1.getAttribute('oldData'), root[0].childNodes[0].data, inputTd2.getAttribute('oldData'), root[1].childNodes[0].data);
+    updateRedirects(inputTd1.getAttribute('oldData'), root[0].childNodes[0].data, inputTd2.getAttribute('oldData'), root[1].childNodes[0].data, btn.parentNode.parentNode.childNodes[0].innerText);
   }
 }
 
@@ -238,14 +249,32 @@ function updateDomain(old, newDomain){
   });
 }
 
-function updateRedirects(oldUrl, newUrl, oldRedirect, newRedirect){
+function updateRedirects(oldUrl, newUrl, oldRedirect, newRedirect, domain){
   console.log(`${oldUrl} ${newUrl} ${oldRedirect} ${newRedirect}`);
-  $.post(location.protocol + "/updateRedirects", {old: old, new: newDomain}, function(data) {
+  $.post(location.protocol + "/updateRedirects", {oldUrl: oldUrl, newUrl: newUrl, oldRedirect: oldRedirect, newRedirect: newRedirect, Domain: domain}, function(data) {
     console.log(data);
     fillDomainTable();
   });
 }
 
 function createRedirect(domain, redirect, url){
+  if(redirect == undefined || url == undefined || redirect == "" || url == ""){
+    console.log("Error");
+    alert("One field contains empty data.");
+    return;
+  }
+  console.log(redirect);
+  $.post(location.protocol + "/addRedirect", {Domain: domain, Url: url, Redirect: redirect}, function(data) {
+    console.log(data);
+    createRedirects();
+  });
+}
 
+function deleteRedirect(btn){
+  var domain = btn.parentNode.parentNode.childNodes[0].innerText;
+  var url = btn.parentNode.childNodes[0].innerText;
+  var redirect = btn.parentNode.childNodes[1].innerText;
+  $.post(location.protocol + "/deleteRedirect", {Domain: domain, Url: url, Redirect: redirect}, function(data) {
+    createRedirects();
+  });
 }

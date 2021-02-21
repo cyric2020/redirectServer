@@ -4,12 +4,12 @@
       "Domain": "localhost",
       "Redirects": [
         {
-          "Origin": "youtube",
-          "Redirect": "https://youtube.com"
-        },
-        {
           "Origin": "google",
           "Redirect": "https://google.com"
+        },
+        {
+          "Origin": "youtube",
+          "Redirect": "https://youtube.com"
         }
       ]
     },

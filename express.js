@@ -139,6 +139,57 @@ app.post('/redirects', (req, res) => {
   res.send(pullRedirectsAndDomains(json));
 });
 
+app.post('/addRedirect', (req, res) => {
+  var body = req.body;
+  if(body.Domain == undefined){
+    res.send("No Domain domain defined.");
+    return;
+  }else if(body.Url == undefined){
+    res.send("No Url domain defined.");
+    return;
+  }else if(body.Redirect == undefined){
+    res.send("No Redirect domain defined.");
+    return;
+  }
+  var json = pullJson();
+
+  for(i = 0; i < json.Domains.length; i++){
+    if(json.Domains[i].Domain == body.Domain){
+      json.Domains[i].Redirects.push({Origin: body.Url, Redirect: body.Redirect})
+    }
+  }
+
+  writeJson(json);
+  res.sendStatus(200);
+});
+
+app.post('/deleteRedirect', (req, res) => {
+  var body = req.body;
+  if(body.Domain == undefined){
+    res.send("No Domain domain defined.");
+    return;
+  }else if(body.Url == undefined){
+    res.send("No Url domain defined.");
+    return;
+  }else if(body.Redirect == undefined){
+    res.send("No Redirect domain defined.");
+    return;
+  }
+  var json = pullJson();
+
+  for(i = 0; i < json.Domains.length; i++){
+    if(json.Domains[i].Domain == body.Domain){
+      for(o = 0; o < json.Domains[i].Redirects.length; o++){
+        if(json.Domains[i].Redirects[o].Origin == body.Url && json.Domains[i].Redirects[o].Redirect == body.Redirect){
+          json.Domains[i].Redirects.splice(o, 1);
+          writeJson(json);
+        }
+      }
+    }
+  }
+  res.sendStatus(200);
+});
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
@@ -215,4 +266,12 @@ function pullRedirectsAndDomains(json){
   }
 
   return domains;
+}
+
+function removeItemOnce(arr, value) {
+  var index = arr.indexOf(value);
+  if (index > -1) {
+    arr.splice(index, 1);
+  }
+  return arr;
 }
