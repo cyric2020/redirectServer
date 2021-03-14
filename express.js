@@ -43,6 +43,21 @@ app.get('/panel', (req, res) => {
   });
 });
 
+app.get('/admin', (req, res) => {
+  var options = {
+    root: path.join(__dirname + "/public/html")
+  };
+
+  var fileName = 'admin.html';
+  res.sendFile(fileName, options, function (err) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log('Sent:', fileName);
+    }
+  });
+});
+
 app.get('/:redirect', (req, res) => {
   var host = req.hostname;
   var json = pullJson();
@@ -187,6 +202,38 @@ app.post('/deleteRedirect', (req, res) => {
       }
     }
   }
+  res.sendStatus(200);
+});
+
+app.post('/addDomain', (req, res) => {
+  var body = req.body;
+  if(body.Domain == undefined){
+    res.send("No Domain defined.");
+    return;
+  }
+  var json = pullJson();
+
+  json.Domains.push({ "Domain": body.Domain, "Redirects": [] });
+
+  writeJson(json);
+  res.sendStatus(200);
+});
+
+app.post('/deleteDomain', (req, res) => {
+  var body = req.body;
+  if(body.Domain == undefined){
+    res.send("No Domain defined.");
+    return;
+  }
+  var json = pullJson();
+
+  for(i = 0; i < json.Domains.length; i++){
+    if(json.Domains[i].Domain == body.Domain){
+      json.Domains.splice(i, 1);
+    }
+  }
+
+  writeJson(json);
   res.sendStatus(200);
 });
 

@@ -64,10 +64,37 @@ function fillDomainTable(){
       })
       edit.appendChild(icon);
 
+      var deleteRow = document.createElement('td');
+      var iconDelete = document.createElement('i');
+      iconDelete.classList.add('fas');
+      iconDelete.classList.add('fa-trash-alt');
+      deleteRow.addEventListener('click', function (){
+        deleteDomain(this);
+      })
+      deleteRow.appendChild(iconDelete);
+
       table.appendChild(tr);
       tr.appendChild(td);
       tr.appendChild(edit);
+      tr.appendChild(deleteRow);
     }
+
+    var tr = document.createElement('tr');
+    var td = document.createElement('td');
+    var newIn = document.createElement('input');
+    td.appendChild(newIn);
+    var edit = document.createElement('td');
+    var icon = document.createElement('i');
+    icon.classList.add('fas');
+    icon.classList.add('fa-plus-square');
+    edit.addEventListener('click', function (){
+      addDomain(this);
+    })
+    edit.appendChild(icon);
+
+    table.appendChild(tr);
+    tr.appendChild(td);
+    tr.appendChild(edit);
   });
 }
 
@@ -92,6 +119,31 @@ function openEditModeDomains(btn){
 
     updateDomain(inputTd.getAttribute('oldData'), root[0].childNodes[0].data);
   }
+}
+
+function addDomain(btn){
+  var root = btn.parentNode.childNodes;
+  var newDomain = root[0].childNodes[0].value;
+
+  if(newDomain == "" || newDomain == undefined){
+    alert("Please define a proper domain.")
+  }else{
+    $.post(location.protocol + "/addDomain", {Domain: newDomain}, function(data){
+      console.log(data);
+      location.reload();
+    });
+  }
+}
+
+function deleteDomain(btn){
+  var root = btn.parentNode.childNodes;
+  var domain = root[0].childNodes[0].data;
+
+  console.log(domain);
+  $.post(location.protocol + "/deleteDomain", {Domain: domain}, function(data){
+    console.log(data);
+    location.reload();
+  });
 }
 
 function createRedirects(){
