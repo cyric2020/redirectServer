@@ -71,6 +71,23 @@ app.get('/:redirect', (req, res) => {
   }
 });
 
+app.post('/login', (req, res) => {
+  var body = req.body;
+  if(body.username == undefined || body.username == ""){
+    res.send("No username defined.");
+    return;
+  }else if(body.password == undefined || body.password == ""){
+    res.send("No password defined.");
+    return;
+  }
+
+  var json = pullAccounts();
+
+  for(i = 0; i < json.Accounts; i++){
+    console.log(json.Accounts[i]);
+  }
+});
+
 app.post('/domains', (req, res) => {
   var json = pullJson();
   res.send(pullDomains(json));
@@ -276,6 +293,12 @@ function getJsonIndex(json, contains){
 
 function pullJson(){
   var rawdata = fs.readFileSync('redirects.json');
+  var data = JSON.parse(rawdata);
+  return data;
+}
+
+function pullAccounts(){
+  var rawdata = fs.readFileSync('accounts.json');
   var data = JSON.parse(rawdata);
   return data;
 }

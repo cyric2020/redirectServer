@@ -1,0 +1,9 @@
+{
+  "Accounts": [
+    {
+      "Username": "Admin",
+      "Password": "Admin",
+      "Admin": true
+    }
+  ]
+}
