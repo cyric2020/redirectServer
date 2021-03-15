@@ -4,6 +4,11 @@
       "Username": "Admin",
       "Password": "Admin",
       "Admin": true
+    },
+    {
+      "Username": "nonAdmin",
+      "Password": "nonAdmin",
+      "Admin": false
     }
   ]
 }

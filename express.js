@@ -82,9 +82,19 @@ app.post('/login', (req, res) => {
   }
 
   var json = pullAccounts();
+  var found = false;
 
-  for(i = 0; i < json.Accounts; i++){
-    console.log(json.Accounts[i]);
+  for(i = 0; i < json.Accounts.length; i++){
+    if(json.Accounts[i].Username == body.username){
+      if(json.Accounts[i].Password == body.password){
+        res.send(json.Accounts[i]);
+        found = true;
+      }
+    }
+  }
+
+  if(found == false){
+    res.send({error: true})
   }
 });
 

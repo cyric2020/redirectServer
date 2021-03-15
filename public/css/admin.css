@@ -1,7 +1,8 @@
 body{
-  background-color: var(--darker);
+  background-color: var(--dark);
   margin: 0;
   font-family: sans-serif;
+  color: var(--white);
 }
 
 @keyframes fadeIn{
@@ -36,7 +37,7 @@ input[type="Text"], input[type="Password"]{
   outline: none;
   border: none;
 
-  border-radius: 50px;
+  border-radius: 5px;
 
   margin: 10px;
   margin-left: 50%;
@@ -50,11 +51,11 @@ input[type="Text"], input[type="Password"]{
   width: 80%;
 }
 
-button{
+button.login{
   outline: none;
   border: none;
 
-  border-radius: 50px;
+  border-radius: 5px;
 
   border: 2px solid var(--primary);
 
@@ -76,13 +77,80 @@ button{
   transition-duration: 0.3s;
 }
 
-button:hover{
+button.login:hover{
   outline: none;
   border: none;
 
-  width: 80%;
+  /* width: 80%; */
+
+  border-radius: 20px;
 
   border: 2px solid var(--primary);
 
   background-color: var(--white);
+}
+
+.hidden{
+  display: none;
+}
+
+button{
+  color: white;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+h2{
+  margin: 0;
+  padding: 0;
+}
+
+input{
+  width: 100%;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  height: 100vh;
+  background-color: var(--darker);
+}
+
+li a {
+  display: block;
+  color: white;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+/* Change the link color on hover */
+li a:hover {
+  color: var(--primary);
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  text-align: left;
+  padding: 8px;
+  background-color: var(--darker);
+}
+
+tr{
+  padding-bottom: 10px;
+}
+
+.flex-container{
+  display: flex;
+}
+
+.containerMargins{
+  margin: 20px;
 }
