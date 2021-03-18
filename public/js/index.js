@@ -1,7 +1,15 @@
 window.onload = () => {
-  if(localStorage.getItem('loggedin') != 'true'){
-    window.location = 'http://localhost:3000/login';
+  if(localStorage.getItem('username') == undefined || localStorage.getItem('password') == undefined){
+    window.location = '/login';
   }
+
+  $.post(location.protocol + "/login", {username: localStorage.getItem('username'), password: localStorage.getItem('password')}, function(data) {
+    if(data.error == true){
+      localStorage.setItem('username', undefined);
+      localStorage.setItem('password', undefined);
+      window.location = '/login';
+    }
+  });
   params();
   fillTables();
 }
@@ -40,6 +48,12 @@ function insertParam(key, value) {
 
     // reload page with new params
     document.location.search = params;
+}
+
+function logOut(){
+  localStorage.setItem('username', undefined);
+  localStorage.setItem('password', undefined);
+  window.location = '/login';
 }
 
 function fillTables(){

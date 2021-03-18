@@ -12,13 +12,15 @@ body{
   margin-top: 50vh;
   transform: translate(-50%, -50%);
   color: white;
+  text-align: center;
+  padding: 10px;
 }
 
 input[type="Text"], input[type="Password"]{
   outline: none;
   border: none;
 
-  border-radius: 50px;
+  border-radius: 5px;
 
   margin: 10px;
   margin-left: 50%;
@@ -36,9 +38,9 @@ button{
   outline: none;
   border: none;
 
-  border-radius: 50px;
+  border-radius: 5px;
 
-  border: 2px solid var(--primary);
+  /* border: 2px solid var(--primary); */
 
   margin: 10px;
   margin-top: 20px;
@@ -62,11 +64,14 @@ button:hover{
   outline: none;
   border: none;
 
-  width: 80%;
+  /* width: 80%; */
 
-  border: 2px solid var(--primary);
+  /* border: 2px solid var(--primary); */
 
-  background-color: var(--white);
+  background-color: var(--primary);
+  color: white;
+
+  cursor: pointer;
 }
 
 /* input[type="Text"], input[type="Password"]:focus{

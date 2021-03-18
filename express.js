@@ -1,7 +1,7 @@
+const fs = require('fs');
 const express = require('express');
 const app = express();
-const port = 3000;
-const fs = require('fs');
+const port = pullConfig().Port;
 const path = require('path');
 const bodyParser = require('body-parser');
 
@@ -264,9 +264,18 @@ app.post('/deleteDomain', (req, res) => {
   res.sendStatus(200);
 });
 
+
+//Start webserver ---------------------------------------------
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
+
+
+
+
+
+//Functions ------------------------------------------------
 
 function jsonArrayDomain(json, contains){
   returnTrue = false;
@@ -303,6 +312,12 @@ function getJsonIndex(json, contains){
 
 function pullJson(){
   var rawdata = fs.readFileSync('redirects.json');
+  var data = JSON.parse(rawdata);
+  return data;
+}
+
+function pullConfig(){
+  var rawdata = fs.readFileSync('config.json');
   var data = JSON.parse(rawdata);
   return data;
 }
